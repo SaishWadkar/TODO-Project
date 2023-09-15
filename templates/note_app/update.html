@@ -1,0 +1,21 @@
+{% extends 'note_app/index.html' %}
+{% block myblock %}
+{% load static %}
+
+
+
+<div class="container">
+    <div class="jumbotron">
+      <h2>Update Task</h2>
+      <form method="POST">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input type="submit" name="create" class="btn btn-primary" value="Update">
+      </form>
+    </div>
+  </div>
+  
+
+{% endblock %}
+
+

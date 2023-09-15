@@ -1,0 +1,13 @@
+{% extends 'note_app/index.html' %}
+{% block myblock %}
+<div class="container">
+  <div class="jumbotron">
+    <h2>Please fill out below details</h2>
+    <form method="POST">
+      {{form.as_p}}
+      {% csrf_token %}
+      <input type="submit" name="create" class="btn btn-success" value="Add">
+    </form>
+  </div>
+</div>
+{% endblock %}

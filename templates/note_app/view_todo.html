@@ -1,0 +1,122 @@
+{% extends 'note_app/index.html' %}
+{% block myblock %}
+{% load static %}
+<!-- Direct list in single page-->
+
+  {% for msg in messages %}
+  <div class="container">
+    <div class="jumbotron">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Hey, </strong> {{msg}} &#128517;
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>    
+    </div>
+  </div>
+  {% endfor %}
+
+  <h2 style="text-align:center ;">TODO List</h2>
+  <div class="container">  
+    {% if all_todos %}      
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;  #</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Update</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in page_track %}
+        <tr>
+          <th scope="row"><img src="{% static 'images/check_small.png' %}" alt="check image"></th>
+          <td>{{i.title}}</td>
+          <td>{{i.description}}</td>
+          <td><a href="{% url 'update' i.id %}"><img src="{% static 'images/update.png' %}" alt="update image" height="40" width="40"></a></td>
+          <td><a href="{% url 'delete' i.id %}"><img src="{% static 'images/delete.png' %}" alt="delete image" height="40" width="40"></a></td>
+
+        </tr>
+        
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  
+  </div>
+
+
+
+<!-- Data -->
+<!-- <div class="container">
+  <div class="container">
+    
+
+      {% if all_todos %}
+        <ul>
+        {% for i in page_track %}
+            <li>Note</li>
+        <ul>
+          <li>Title : {{i.title}} </li>
+          <li>Description : {{i.description}} </li>
+          <br>
+        </ul>
+
+        {% endfor %}
+        </ul>
+      {% endif %}
+
+  </div>
+</div> -->
+
+<br><hr>
+
+<p style="text-align: center ;">
+{% if page_track.has_previous %}
+  <a href="?page=1">&laquo; First</a>
+  <a href="?page={{page_track.previous_page_number}}">previous</a>
+{% endif %} 
+
+{{page_track}}
+
+{% if page_track.has_next %}
+<a href="?page={{page_track.next_page_number}}">next</a>
+<a href="?page={{page_track.paginator.num_pages}}">&raquo;Last</a>
+{% endif %}
+</p>
+
+
+<!-- Pagination-->
+
+<!-- {% if all_todos.has_other_pages %}
+
+  {% for i in all_todos.paginator.page_range %}
+
+  {% if i == all_todos.number %}
+  <p style="text-align:center ;">
+    <a href="?page={{i}}" style="color: red ;">{{i}}</a>
+  <p>
+
+  {% else %}
+
+  <p style="text-align:center ;">
+    <a href="?page={{i}}">{{i}}</a>
+  </p>
+
+  {% endif %}
+  
+  {% endfor %}
+</ul>
+
+<p style="text-align:center;">{{page_track}}</p>
+<p style="text-align:center;">{{page_track.has_previous}}</p>
+<p style="text-align:center;">{{page_track.has_next}}</p>
+<p style="text-align:center;">{{page_track.number}}</p>
+<p style="text-align:center;">{{page_track.paginator.num_pages}}</p>
+
+{% endif %} -->
+
+
+{% endblock %}
+
+
